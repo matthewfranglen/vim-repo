@@ -1,0 +1,44 @@
+#!/bin/zsh
+
+ROOT_FOLDER=${0:A:h:h}
+REPO_FOLDER=${ROOT_FOLDER}/src/repo
+
+function repo_exists () {
+    [ -e ${REPO_FOLDER} ]
+}
+
+function pull_changes () {
+    (
+        cd ${REPO_FOLDER}
+        hg pull
+    )
+}
+
+# The exit status of this indicates if a new tag has been published
+function checkout_latest_tag () {
+    (
+        cd ${REPO_FOLDER}
+
+        # This checks out the latest tag.
+        # See: http://stackoverflow.com/a/7577432/170865
+
+        # The output is similar to:
+        #   0 files updated, 0 files merged, 0 files removed, 0 files unresolved
+        # Any non zero number indicates that something changed
+        # I.E. There is a newer tag
+        hg update -r 'max(tagged())' | grep '[1-9]' >/dev/null
+    )
+}
+
+function clone_repo () {
+    hg clone https://code.google.com/p/vim/ ${REPO_FOLDER}
+}
+
+if repo_exists
+then
+    pull_changes && checkout_latest_tag
+else
+    clone_repo
+fi
+
+# vim: set ai et sw=4 syntax=zsh :

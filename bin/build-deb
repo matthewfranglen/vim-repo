@@ -1,0 +1,37 @@
+#!/bin/zsh
+
+ROOT_FOLDER=${0:A:h:h}
+REPO_FOLDER=${ROOT_FOLDER}/src/repo
+CONTROL_FOLDER=${ROOT_FOLDER}/src/DEBIAN
+CONTROL_FILE=${CONTROL_FOLDER}/control
+TARGET_FOLDER=${ROOT_FOLDER}/target
+PACKAGES_FOLDER=${ROOT_FOLDER}/packages
+
+function get_version () {
+    (
+        cd ${REPO_FOLDER}
+
+        # Gets the tag, strips any letters from it, and converts it to dotted form
+        # See http://stackoverflow.com/a/17848126/170865
+        hg id -r '::. and tag()' | awk ' { print $2 } ' | tr -dc '0-9-.' | tr '-' '.'
+    )
+}
+
+function set_version () {
+    sed -i -e 's/Version:.*/Version: '$(get_version)'/' ${CONTROL_FILE}
+}
+
+function install_control () {
+    [ -e ${TARGET_FOLDER}/DEBIAN ] && rm -rf ${TARGET_FOLDER}/DEBIAN
+    cp -r ${CONTROL_FOLDER} ${TARGET_FOLDER}/DEBIAN
+}
+
+# The exit status of this indicates if a new tag has been published
+function build_deb () {
+    [ ! -e ${PACKAGES_FOLDER} ] && mkdir -p ${PACKAGES_FOLDER}
+    dpkg-deb --build ${TARGET_FOLDER} ${PACKAGES_FOLDER}/vim_$(get_version)_amd64.deb
+}
+
+set_version && install_control && build_deb
+
+# vim: set ai et sw=4 syntax=zsh :

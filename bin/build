@@ -1,0 +1,36 @@
+#!/bin/zsh
+
+ROOT_FOLDER=${0:A:h:h}
+SRC_FOLDER=${ROOT_FOLDER}/src
+TARGET_FOLDER=${ROOT_FOLDER}/target
+
+function start_vm () {
+    [ ! -e ${TARGET_FOLDER} ] && mkdir -p ${TARGET_FOLDER}
+    (
+        cd ${SRC_FOLDER}
+        vagrant up
+    )
+}
+
+function build () {
+    (
+        cd ${SRC_FOLDER}
+        vagrant ssh -- '/vagrant/build'
+    )
+}
+
+function destroy_vm () {
+    (
+        cd ${SRC_FOLDER}
+        vagrant destroy
+    )
+}
+
+start_vm && build
+build_status=$?
+
+destroy_vm
+
+exit $build_status
+
+# vim: set ai et sw=4 syntax=zsh :

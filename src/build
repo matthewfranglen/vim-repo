@@ -1,0 +1,13 @@
+#!/bin/sh
+
+SOURCE=/vagrant/repo/src
+TARGET=/target
+
+cd ${SOURCE}
+
+make distclean
+./configure --with-features=huge
+make
+sudo DESTDIR=${TARGET} make install
+
+# vim: set ai et sw=4 syntax=sh :

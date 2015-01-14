@@ -1,0 +1,15 @@
+Package: vim
+Version: 7.4.580
+Architecture: amd64
+Maintainer: Matthew Franglen <matthew@franglen.io>
+Homepage: http://www.vim.org/
+Description: Vi IMproved - Common GUI files
+ Vim is an almost compatible version of the UNIX editor Vi.
+ .
+ Many new features have been added: multi level undo, syntax
+ highlighting, command line history, on-line help, filename
+ completion, block operations, folding, Unicode support, etc.
+ .
+ This package contains files shared by all GUI-enabled vim
+ variants available in Debian.  Examples of such shared files are:
+ gvimtutor, icons, desktop environments settings, and menu entries.
