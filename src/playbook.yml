@@ -19,6 +19,9 @@
       - libx11-dev
       - libxpm-dev
       - libxt-dev
+      - libperl-dev
+      - libpython-dev
+      - libpython3-dev
       - ruby-dev
 
 # vim: set ai et sw=4 syntax=yaml :

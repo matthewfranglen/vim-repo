@@ -22,7 +22,7 @@ function build () {
 function destroy_vm () {
     (
         cd ${SRC_FOLDER}
-        vagrant destroy
+        vagrant destroy --force
     )
 }
 
