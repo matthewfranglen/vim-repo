@@ -4,12 +4,16 @@ This will build the latest tag of Vim to a debian package.
 
 ## Installation
 
-Ensure you have a recent version of [Vagrant](https://www.vagrantup.com/downloads.html) and [Ansible](http://docs.ansible.com/intro_installation.html#latest-releases-via-pip) installed.
+Ensure you have a recent version of [Vagrant](https://www.vagrantup.com/downloads.html) and [Ansible](http://docs.ansible.com/intro_installation.html#latest-releases-via-pip) installed. This also requires ZSH, which can be installed using your package manager.
 
-        git clone ...
+        git clone https://github.com/matthewfranglen/vim-repo
         vagrant box add ubuntu/trusty64 --provider virtualbox
 
 ## Execution
+
+        bin/update
+
+OR
 
         bin/update-repo && bin/build && bin/build-deb
 

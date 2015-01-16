@@ -1,0 +1,19 @@
+#!/bin/sh
+
+BIN_FOLDER=`dirname $0`
+
+update_repo () {
+    env -i ${BIN_FOLDER}/update-repo
+}
+
+build_vim () {
+    env -i ${BIN_FOLDER}/build
+}
+
+build_deb_package () {
+    env -i ${BIN_FOLDER}/build-deb
+}
+
+update_repo && build_vim && build_deb_package
+
+# vim: set ai et sw=4 syntax=sh :
