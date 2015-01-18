@@ -1,7 +1,8 @@
 Package: vim
 Version: 7.4.582
 Architecture: amd64
-Depends: perl-base, libruby1.9.1
+Depends: perl-base, libruby1.9.1, libacl1 (>= 2.2.51-5), libc6 (>= 2.15), libgpm2 (>= 1.20.4), libpython2.7 (>= 2.7), libselinux1 (>= 1.32), libtinfo5
+Suggests: ctags, vim-doc, vim-scripts
 Maintainer: Matthew Franglen <matthew@franglen.io>
 Homepage: http://www.vim.org/
 Description: Vi IMproved - Common GUI files
