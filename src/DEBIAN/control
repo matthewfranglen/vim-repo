@@ -1,6 +1,7 @@
 Package: vim
 Version: 7.4.580
 Architecture: amd64
+Depends: perl-base, libruby1.9.1
 Maintainer: Matthew Franglen <matthew@franglen.io>
 Homepage: http://www.vim.org/
 Description: Vi IMproved - Common GUI files
