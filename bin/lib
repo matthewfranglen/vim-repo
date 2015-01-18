@@ -4,6 +4,10 @@ REPO_FOLDER=${ROOT_FOLDER}/src/repo
 SRC_FOLDER=${ROOT_FOLDER}/src
 TARGET_FOLDER=${ROOT_FOLDER}/target
 
+# The ubuntu repository uses epoc 2, so this must beat that to get installed instead of it.
+# See `man deb-version`.
+EPOCH=3
+
 function error () {
     printf "%s\n" $@ >&2
 }
