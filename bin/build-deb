@@ -3,11 +3,7 @@
 emulate -L zsh
 
 ROOT_FOLDER=${0:A:h:h}
-REPO_FOLDER=${ROOT_FOLDER}/src/repo
-CONTROL_FOLDER=${ROOT_FOLDER}/src/DEBIAN
-CONTROL_FILE=${CONTROL_FOLDER}/control
-TARGET_FOLDER=${ROOT_FOLDER}/target
-PACKAGES_FOLDER=${ROOT_FOLDER}/packages
+source ${ROOT_FOLDER}/bin/lib
 
 function get_version () {
     (
@@ -33,6 +29,8 @@ function build_deb () {
     [ ! -e ${PACKAGES_FOLDER} ] && mkdir -p ${PACKAGES_FOLDER}
     dpkg-deb --build ${TARGET_FOLDER} ${PACKAGES_FOLDER}/vim_$(get_version)_amd64.deb
 }
+
+parse_args $@
 
 set_version && install_control && build_deb
 

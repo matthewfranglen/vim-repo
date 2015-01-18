@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SOURCE=/vagrant/repo/src
+SOURCE=/src/repo/src
 TARGET=/target
 
 cd ${SOURCE}

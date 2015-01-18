@@ -3,30 +3,31 @@
 emulate -L zsh
 
 ROOT_FOLDER=${0:A:h:h}
-SRC_FOLDER=${ROOT_FOLDER}/src
-TARGET_FOLDER=${ROOT_FOLDER}/target
+source ${ROOT_FOLDER}/bin/lib
 
 function start_vm () {
     [ ! -e ${TARGET_FOLDER} ] && mkdir -p ${TARGET_FOLDER}
     (
-        cd ${SRC_FOLDER}
+        cd_architecture
         vagrant up
     )
 }
 
 function build () {
     (
-        cd ${SRC_FOLDER}
-        vagrant ssh -- '/vagrant/build'
+        cd_architecture
+        vagrant ssh -- '/src/build'
     )
 }
 
 function destroy_vm () {
     (
-        cd ${SRC_FOLDER}
+        cd_architecture
         vagrant destroy --force
     )
 }
+
+parse_args $@
 
 start_vm && build
 build_status=$?

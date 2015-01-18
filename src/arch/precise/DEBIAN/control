@@ -1,5 +1,5 @@
 Package: vim
-Version: 7.4.580
+Version: 7.4.582
 Architecture: amd64
 Depends: perl-base, libruby1.9.1
 Maintainer: Matthew Franglen <matthew@franglen.io>
