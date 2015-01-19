@@ -16,7 +16,8 @@ function get_version () {
 }
 
 function set_version () {
-    sed -i -e 's/Version:.*/Version: '$(get_version)'/' ${CONTROL_FILE}
+    local version="${EPOCH}:$(get_version)"
+    sed -i -e 's/Version:.*/Version: '${version}'/' ${CONTROL_FILE}
 }
 
 function install_control () {
@@ -27,7 +28,7 @@ function install_control () {
 # The exit status of this indicates if a new tag has been published
 function build_deb () {
     [ ! -e ${PACKAGES_FOLDER} ] && mkdir -p ${PACKAGES_FOLDER}
-    dpkg-deb --build ${TARGET_FOLDER} ${PACKAGES_FOLDER}/vim_$(get_version)_amd64.deb
+    dpkg-deb --build ${TARGET_FOLDER} ${PACKAGES_FOLDER}/vim_$(get_version)_${ARCHITECTURE}_amd64.deb
 }
 
 parse_args $@
